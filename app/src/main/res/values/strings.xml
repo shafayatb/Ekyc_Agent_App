@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Giga Ekyc</string>
+    <string name="agentStartText">To Start off,\nPlease enter your\nPhone Number</string>
+    <string name="goString">go!</string>
+    <string name="verificationCodeString">A Verification Code\nhas been sent to you\nto verify your identity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Hi,</string>
+    <string name="nav_header_subtitle">Agent Name</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="nid_confirm">1.Make sure your captured NID card\'s photo is not blur/out-of-focus, you can go back and take photo once again.\n\n2.If everything is alright tap "Confirm"\n\n </string>
+    <string name="confirm_msg2_pt2">Customer will get a tracking number which will be used for further steps of the account opening process. please refer to the sms for more details.</string>
+    <string name="confirm_msg_pt1">Your given information have been successfully verified and an sms has been sent to customers: 0171853535 </string>
+    <string name="menu_home">Dashboard</string>
+    <string name="menu_gallery">New Customer Registration</string>
+    <string name="menu_slideshow">FAQ</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="please_read">Please read our terms and conditions</string>
+    <string name="who_may_use">Who May Use the Services?</string>
+    <string name="intro_text">When one door of happiness closes, another opens, but often we look so long at the closed door that we do not see the one that has been opened for us.
+    </string>
+
+    <string name="step_1">
+
+    </string>
+
+    <string name="privacy">Privacy</string>
+    <string name="privacy_text">When one door of happiness closes, another opens,
+        but often we so long at the closed</string>
+    <string name="agree_continue"><![CDATA[agree & continue]]></string>
+    <string name="camera_instruction_1">1. Hold the camera away from your face</string>
+    <string name="camera_instruction_2">2. Position your face within the frame</string>
+    <string name="camera_instruction_3">3. The camera will take your photo\nautomatically when face is detected</string>
+    <string name="instructions">Instructions</string>
+    <string name="confirm">Confirm?</string>
+    <string name="confm_text">
+        You are ensuring all the information provided by you are authentic and you are allowing us some time to review &amp; validate the information
+    </string>
+    <string name="welcome_to_nekyc_app">Welcome to  EKYC APP</string>
+    <string name="you_may_use_the_services_only_if">You may use the Services only if</string>
+    <string name="take_a_photo">Take a photo of the front side of your NID car/Smart card</string>
+    <string-array name="numbers">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="licence_text">Terms and Conditions agreements act as a legal contract between you (the company) who has the website or mobile app and the user who access your website and mobile app.
+
+Having a Terms and Conditions agreement is completely optional. No laws require you to have one. Not even the super-strict and wide-reaching General Data Protection Regulation (GDPR).
+
+It’s up to you to set the rules and guidelines that the user must agree to. You can think of your Terms and Conditions agreement as the legal agreement where you maintain your rights to exclude users from your app in the event that they abuse your app, where you maintain your legal rights against potential app abusers, and so on.
+   Terms and Conditions agreements act as a legal contract between you (the company) who has the website or mobile app and the user who access your website and mobile app.
+
+Having a Terms and Conditions agreement is completely optional. No laws require you to have one. Not even the super-strict and wide-reaching General Data Protection Regulation (GDPR).
+
+It’s up to you to set the rules and guidelines that the user must agree to. You can think of your Terms and Conditions agreement as the legal agreement where you maintain your rights to exclude users from your app in the event that they abuse your app, where you maintain your legal rights against potential app abusers, and so on.
+        Terms and Conditions agreements act as a legal contract between you (the company) who has the website or mobile app and the user who access your website and mobile app.
+
+Having a Terms and Conditions agreement is completely optional. No laws require you to have one. Not even the super-strict and wide-reaching General Data Protection Regulation (GDPR).
+
+It’s up to you to set the rules and guidelines that the user must agree to. You can think of your Terms and Conditions agreement as the legal agreement where you maintain your rights to exclude users from your app in the event that they abuse your app, where you maintain your legal rights against potential app abusers, and so on.
+        Terms and Conditions agreements act as a legal contract between you (the company) who has the website or mobile app and the user who access your website and mobile app.
+
+Having a Terms and Conditions agreement is completely optional. No laws require you to have one. Not even the super-strict and wide-reaching General Data Protection Regulation (GDPR).
+
+It’s up to you to set the rules and guidelines that the user must agree to. You can think of your Terms and Conditions agreement as the legal agreement where you maintain your rights to exclude users from your app in the event that they abuse your app, where you maintain your legal rights against potential app abusers, and so on.
+    </string>
+</resources>

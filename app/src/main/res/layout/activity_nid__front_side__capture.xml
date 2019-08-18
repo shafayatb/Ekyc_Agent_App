@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#241332"
+    android:orientation="vertical"
+    tools:context=".NidFrontSideCapture">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/step1_textViewId"
+                android:layout_marginTop="40dp"
+                android:text="STEP 1"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <android.support.design.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="20dp"
+                >
+
+                <TextureView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:id="@+id/textureViewId_imagePreview"
+                    />
+
+            </android.support.design.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="50dp"
+                android:paddingEnd="30dp"
+                android:text="@string/take_a_photo"
+                android:textAlignment="viewStart"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="26sp" />
+
+            <!--<TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:paddingStart="50dp"
+                android:text="1.Make sure your room or \nsurrounding is well nlit so you can\n read your NID card info through\n the camera   "
+                android:textColor="#707070"
+                android:textSize="19sp"
+                android:paddingEnd="30dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="50dp"
+                android:text="2.Take the NID card in the\n picture form as best as you can"
+                android:textColor="#707070"
+                android:textSize="19sp"
+                android:paddingEnd="30dp"/>-->
+
+            <Button
+                android:id="@+id/nidFrontConfmButtonId"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/camera"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgentLogInActivity"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backButtonId_agentLogIn"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableStart="@drawable/arrow_back_black_24dp"
+        android:drawablePadding="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/agentStartText"
+        android:layout_marginStart="50dp"
+        android:textSize="26sp"
+        android:textColor="#030303"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneEtId"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#030303"
+        android:maxLength="11"
+        android:textSize="28sp"
+        android:inputType="number"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/goButtonId"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/round_button"
+        android:text="@string/goString"
+        android:textColor="#9B9B9B"
+
+        />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:id="@+id/snackbar_text"
+        />
+
+</LinearLayout>

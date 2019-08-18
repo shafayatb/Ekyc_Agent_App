@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeActivity"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/bgBlackId"
+        android:background="@drawable/bg_black"
+        android:layout_marginBottom="100dp"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/backgroundImageId"
+        android:background="@drawable/bg_1"
+        android:layout_marginBottom="100dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="112dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/bg_2">
+
+        <TextView
+            android:id="@+id/tvId_hiThere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Hi there"
+            android:textColor="#f9f9f9"
+            android:textSize="11sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvId_hiThere"
+            android:layout_marginStart="30dp"
+            android:text="Welcome to \nEKYC APP"
+            android:textColor="#f9f9f9"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:id="@+id/relativeLayoutId_getStarted"
+        android:background="@drawable/bg_3"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentEnd="true"
+
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/startedTvId"
+            android:text="GET STARTED"
+            android:layout_centerInParent="true"
+            android:textColor="#f9f9f9"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="false"
+            />
+
+        <Button
+            android:layout_width="20dp"
+            android:layout_height="10dp"
+            android:id="@+id/startButtonId"
+            android:layout_toEndOf="@+id/startedTvId"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_centerInParent="true"
+            android:drawableEnd="@drawable/arrow_forward_black_24dp"
+            android:layout_marginStart="10dp"
+            android:clickable="false"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

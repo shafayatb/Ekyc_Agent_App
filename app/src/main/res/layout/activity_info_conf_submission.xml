@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoConfSubmissionActivity"
+    android:background="#998FA2"
+    android:orientation="vertical"
+    >
+
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:background="@drawable/bck_confm_sbmsn"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="280dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/bg_info_confm">
+
+        <TextView
+            android:id="@+id/confm_textViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/confirm"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/confTextTvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/confm_textViewId"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="70dp"
+            android:text="@string/confm_text"
+            android:textColor="#998FA2"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/cancel_backButtonId"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button_cancel" />
+
+        <Button
+            android:id="@+id/submit_backButtonId"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button_submit" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

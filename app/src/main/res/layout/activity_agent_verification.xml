@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgentVerificationActivity"
+    android:orientation="vertical"
+    android:background="#F1F0F2"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:background="@drawable/bg_header"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/backButtonId_AgentVerification"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableStart="@drawable/arrow_back_black_24dp"
+            android:drawablePadding="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/verificationTvId"
+            android:layout_below="@+id/backFromAgentVerification_ButtonId"
+            android:text="@string/verificationCodeString"
+            android:layout_marginStart="50dp"
+            android:textSize="26sp"
+            android:textColor="#030303"
+
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+
+        <EditText
+            android:layout_width="57dp"
+            android:layout_height="81dp"
+            android:id="@+id/numField1EtId"
+            android:background="@drawable/number_field"
+            android:layout_marginEnd="5dp"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:layout_width="57dp"
+            android:layout_height="81dp"
+            android:id="@+id/numField2EtId"
+            android:background="@drawable/number_field"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:layout_width="57dp"
+            android:layout_height="81dp"
+            android:id="@+id/numField3EtId"
+            android:background="@drawable/number_field"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:layout_width="57dp"
+            android:layout_height="81dp"
+            android:id="@+id/numField4EtId"
+            android:background="@drawable/number_field"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/resendCodeTvId"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Resend Code"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="#8A56AC"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_purple_curve"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nextButtonId"
+            android:text="next"
+            android:textColor="#f9f9f9"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewId_bd_curve"
+            android:background="@drawable/bg_white_curve"
+            android:layout_marginTop="60dp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

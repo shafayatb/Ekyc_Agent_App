@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:background="@drawable/hdpi"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:background="@drawable/bg_header">
+
+                    <Button
+                        android:id="@+id/backFromAgentVerification_ButtonId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:drawableStart="@drawable/arrow_back_black_24dp"
+                        android:drawablePadding="10dp" />
+
+                    <TextView
+                        android:id="@+id/step3id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/backFromAgentVerification_ButtonId"
+                        android:layout_marginStart="150dp"
+                        android:text="STEP 3"
+                        android:layout_marginTop="20dp"
+                        android:textColor="#030303"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/normaltextid"
+                        android:layout_below="@+id/backFromAgentVerification_ButtonId"
+                        android:text="Review the information and edit if required"
+                        android:textSize="16sp"
+                        android:padding="10dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="50dp"/>
+
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:orientation="vertical">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_marginTop="25dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:focusable="true"
+                        android:textColorHint="#ffffff">
+                        <EditText
+                            android:id="@+id/nidid"
+                            android:editable="false"
+                            android:focusable="false"
+                            android:longClickable="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="NID Number"
+                            android:textColor="#ffffff"
+                            android:layout_marginStart="18dp"
+                            android:textSize="18sp"
+                            android:inputType="number"/>
+
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_marginTop="25dp"
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="#ffffff">
+                        <EditText
+                            android:id="@+id/dobid"
+                            android:editable="false"
+                            android:focusable="false"
+                            android:longClickable="false"
+                            android:layout_marginLeft="18dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Date of birth"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp"
+                            />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="48dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:focusable="true"
+                        android:textColorHint="#ffffff">
+                        <EditText
+                            android:id="@+id/nameid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Name(Bengali)"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="48dp">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:focusable="true"
+                        android:textColorHint="#ffffff">
+                        <EditText
+                            android:id="@+id/fathersnameid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Father's Name(Bengali)"
+                            android:textSize="18sp"
+                            android:textColor="#ffffff"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:paddingStart="48dp">
+                   <android.support.design.widget.TextInputLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:focusableInTouchMode="true"
+                       android:focusable="true"
+                       android:textColorHint="#ffffff">
+                       <EditText
+                           android:id="@+id/mothersnameid"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:hint="Mother's Name(Bengali)"
+                           android:textSize="18sp"
+                           android:textColor="#ffffff"
+                           />
+                   </android.support.design.widget.TextInputLayout>
+               </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="48dp">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/EditTextHint"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:textColorHint="#000">
+
+                    <EditText
+                        android:id="@+id/presentaddressid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Present Address"
+                        android:inputType="text"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textSize="18sp" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:theme="@style/EditTextHint"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:textColorHint="#000">
+                    <EditText
+                        android:id="@+id/permanentid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Permanent Address"
+                        android:textSize="18sp"
+                        android:inputType="text"
+                        />
+                </android.support.design.widget.TextInputLayout>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Gender"
+                       android:textSize="14sp"
+                       android:textColor="#000"/>
+                   <Spinner
+                       android:id="@+id/spinnerid"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textAlignment="textStart">
+                   </Spinner>
+                   <View
+                       android:layout_marginTop="5dp"
+                       android:layout_marginEnd="2dp"
+                       android:layout_width="match_parent"
+                       android:layout_height="1dp"
+                       android:background="#000">
+                   </View>
+               </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+               >
+                <Button
+                    android:id="@+id/nextButtonId"
+                    android:text="Next"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/round_button"
+                    android:textColor="#ffffff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

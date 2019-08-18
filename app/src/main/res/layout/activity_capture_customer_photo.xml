@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CaptureCustomerPhotoActivity"
+    android:background="#F1F0F2"
+    android:orientation="vertical"
+
+    >
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:src="@drawable/arrow_left"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_selfie"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="150dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Face has been detected!"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:textSize="14sp"
+                    />
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:id="@+id/cardViewId_customerPic"
+                    app:cardCornerRadius="100dp"
+                    android:elevation="12dp"
+                    android:layout_marginTop="90dp"
+                    android:layout_centerHorizontal="true"
+                    >
+
+                        <TextureView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textureViewId_customerImagePreview"
+                            />
+
+                </android.support.v7.widget.CardView>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/instruction_IntroTvId"
+                    android:text="@string/instructions"
+                    android:textColor="#352641"
+                    android:layout_below="@+id/cardViewId_customerPic"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/instruction_1TvId"
+                    android:text="@string/camera_instruction_1"
+                    android:layout_below="@+id/instruction_IntroTvId"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#767676"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/instruction_2TvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/instruction_1TvId"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="-2dp"
+                    android:text="@string/camera_instruction_2"
+                    android:textColor="#767676"
+                    android:textSize="13sp"
+                    android:paddingStart="10dp"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/instruction_3TvId"
+                    android:text="@string/camera_instruction_3"
+                    android:layout_below="@+id/instruction_2TvId"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#767676"
+                    android:textSize="13sp"
+                    android:layout_marginStart="10dp"
+                    android:paddingStart="20dp"
+                    tools:ignore="RtlSymmetry" />
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/customer_pic_capt_buttonId"
+            android:layout_centerHorizontal="true"
+            android:text="test"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            />
+
+</RelativeLayout>

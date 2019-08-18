@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_purple"
+    android:orientation="vertical"
+    android:layout_weight="1"
+    tools:context=".TermsConditionsActivity">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@drawable/bg_purple_header"
+            >
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:id="@+id/backButtonId"
+                android:background="@drawable/back_arrow"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/termsConditionTvId"
+                android:layout_below="@+id/backButtonId"
+                android:layout_marginStart="50dp"
+                android:text="Terms"
+                android:textSize="26sp"
+                android:textColor="#f9f9f9"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_read"
+                android:textColor="#817889"
+                android:layout_below="@+id/termsConditionTvId"
+                android:layout_marginStart="50dp"
+                android:textSize="12sp"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#f9f9f9"
+            >
+
+            <TextView
+                android:id="@+id/licence_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:isScrollContainer="true"
+                android:keepScreenOn="false"
+                android:padding="10dp"
+                android:scrollbarAlwaysDrawHorizontalTrack="false"
+                android:scrollbarAlwaysDrawVerticalTrack="false"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:text="@string/licence_text" />
+        </LinearLayout>
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/service_icon"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/who_may_use"
+                android:layout_marginTop="55dp"
+                android:layout_marginStart="10dp"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/intro_text"
+            android:textColor="#998FA2"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            android:paddingEnd="15dp"
+            />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/step1_textViewId"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="20dp"
+                />
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="40dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/privacy_icon"
+                android:layout_marginStart="30dp"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy"
+                android:textColor="#f9f9f9"
+                android:layout_marginStart="30dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_text"
+            android:textColor="#f9f9f9"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="40dp"
+            />
+-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/agreeContinueButtonId"
+            android:background="@drawable/round_button"
+            android:text="@string/agree_continue"
+            android:textSize="14sp"
+            android:textColor="#f9f9f9"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            />
+
+
+</LinearLayout>
