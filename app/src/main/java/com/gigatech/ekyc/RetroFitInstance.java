@@ -5,7 +5,7 @@ import retrofit2.Retrofit;
 public class RetroFitInstance {
 
     private static Retrofit retrofit;
-    static String BASE_URL = "https://3d81a352-b8da-4670-a901-3d1b4540272f.mock.pstmn.io/";
+    static String BASE_URL = "http://puthi-ocr.com:3000/app/";
 
     public static Retrofit retrofitInstance(){
 
