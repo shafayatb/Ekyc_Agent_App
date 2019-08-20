@@ -14,6 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.gigatech.ekyc.remote.RetroFitInstance;
+import com.gigatech.ekyc.remote.RetrofitApiCall;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
