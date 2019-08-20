@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 import com.gigatech.ekyc.remote.RetroFitInstance;
 import com.gigatech.ekyc.remote.RetrofitApiCall;
+import com.gigatech.ekyc.utils.SharedPreferenceClass;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -103,23 +104,23 @@ public class NIDImageConfirm extends AppCompatActivity {
 
 //        }
 
-        Call<ResponseBody> call = retrofitApiCall.imageNidUpload(images);
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                Log.v("WRE",""+response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                Log.v("WRE",""+call.toString());
-
-            }
-        });
+//        Call<ResponseBody> call = retrofitApiCall.imageNidUpload(images);
+//
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//
+//                Log.v("WRE",""+response.body());
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//                Log.v("WRE",""+call.toString());
+//
+//            }
+//        });
 
     }
 

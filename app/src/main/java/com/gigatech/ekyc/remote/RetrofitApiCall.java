@@ -1,7 +1,11 @@
 package com.gigatech.ekyc.remote;
 
+import com.gigatech.ekyc.model.OtpResponse;
+
+import java.util.HashMap;
 import java.util.List;
 
+import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -10,24 +14,26 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.QueryMap;
 
 public interface RetrofitApiCall {
 
     @FormUrlEncoded
-    @POST("mobileApi/checkLogin")
-    Call<ResponseBody> getLoginDetails(@Field("username") String username,
-                                       @Field("password") String password
-                                       );
+    @POST(ApiEndpoints.REQUEST_OTP_URL)
+    Single<OtpResponse> getOtp(@Field("mobile_no") String mobileNo,
+                               @Field("user_type") String userType);
 
 
     @FormUrlEncoded
-    @POST("mobileApi/checkLogin")
-    Call<ResponseBody> getOTP(@Field("username") String username);
+    @POST(ApiEndpoints.VERIFY_OTP_URL)
+    Single<OtpResponse> verifyOTP(@Field("mobile_no") String mobileNo,
+                              @Field("otp") String otp);
 
     @Multipart
-    @POST("upload/nid-images")
-    Call<ResponseBody> imageNidUpload(
+    @POST(ApiEndpoints.CUSTOMER_REGISTRATION_URL)
+    Single<ResponseBody> imageUpload(
 //            @Part("description") RequestBody description,
+            @QueryMap HashMap<String, String> stepsMap,
             @Part List<MultipartBody.Part> images);
 
 

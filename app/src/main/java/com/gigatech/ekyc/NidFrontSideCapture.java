@@ -34,6 +34,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.gigatech.ekyc.utils.SharedPreferenceClass;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

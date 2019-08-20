@@ -2,24 +2,28 @@ package com.gigatech.ekyc;
 
 import android.content.Intent;
 import android.graphics.Color;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.gigatech.ekyc.model.OtpResponse;
 import com.gigatech.ekyc.remote.RetroFitInstance;
 import com.gigatech.ekyc.remote.RetrofitApiCall;
+import com.gigatech.ekyc.utils.SharedPreferenceClass;
+import com.google.android.material.snackbar.Snackbar;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AgentLogInActivity extends AppCompatActivity {
 
@@ -28,6 +32,7 @@ public class AgentLogInActivity extends AppCompatActivity {
     EditText phoneEt;
     Button goButton;
     Button backButton_agentLogIn;
+    CompositeDisposable disposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class AgentLogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getApplicationContext(),WelcomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
 
             }
         });
@@ -68,7 +73,7 @@ public class AgentLogInActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(charSequence.length() ==11){
+                if (charSequence.length() == 11) {
                     goButton.setEnabled(true);
                     goButton.setTextColor(Color.parseColor("#f9f9f9"));
                 } else {
@@ -86,31 +91,49 @@ public class AgentLogInActivity extends AppCompatActivity {
     }
 
 
-    void gotoButtonClick(View gotoButton){
+    void gotoButtonClick(View gotoButton) {
 
-        if (phoneEt.getText().toString().isEmpty()){
+        if (phoneEt.getText().toString().isEmpty()) {
 
-            Toast.makeText(getApplicationContext(),"Phone number required",Snackbar.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Phone number required", Snackbar.LENGTH_LONG).show();
 //            Snackbar.make(findViewById(R.id.snackbar_text),"Phone number required",Snackbar.LENGTH_LONG).show();
 
-        }else {
+        } else {
+            goButton.setEnabled(false);
+            goButton.setTextColor(Color.parseColor("#9B9B9B"));
+            disposable.add(retrofitApiCall.getOtp(phoneEt.getText().toString(), "agent")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<OtpResponse>(){
 
-            getUserDetails=retrofitApiCall.getLoginDetails("testuser","123456");
-            getUserDetails.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        @Override
+                        public void onSuccess(OtpResponse otpResponse) {
+                            goButton.setEnabled(true);
+                            goButton.setTextColor(Color.parseColor("#f9f9f9"));
+                            if(otpResponse.getStatus().equals("success")){
+                                SharedPreferenceClass.saveVal(getApplicationContext(), "agentNumber", phoneEt.getText().toString());
+                                startActivity(new Intent(getApplicationContext(), AgentVerificationActivity.class));
+                            } else if(otpResponse.getStatus().equals("failed")){
+                                Toast.makeText(AgentLogInActivity.this, "Mobile number is not valid", Toast.LENGTH_LONG).show();
+                            }
+                        }
 
-                    Log.v("RESULT",response.toString());
+                        @Override
+                        public void onError(Throwable e) {
+                            goButton.setEnabled(true);
+                            goButton.setTextColor(Color.parseColor("#f9f9f9"));
+                            Toast.makeText(AgentLogInActivity.this, "Mobile number is not valid", Toast.LENGTH_LONG).show();
+                        }
+                    }));
 
-                }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.v("RESULT",call.toString());
-                }
-            });
-            SharedPreferenceClass.saveVal(getApplicationContext(),"agentNumber",phoneEt.getText().toString());
-            startActivity(new Intent(getApplicationContext(), AgentVerificationActivity.class));
+
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
     }
 }
