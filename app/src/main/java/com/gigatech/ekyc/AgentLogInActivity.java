@@ -46,24 +46,9 @@ public class AgentLogInActivity extends AppCompatActivity {
         retrofitApiCall = RetroFitInstance.retrofitInstance().create(RetrofitApiCall.class);
 
 
-        goButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        goButton.setOnClickListener(this::gotoButtonClick);
 
-                gotoButtonClick(v);
-
-
-            }
-        });
-
-        backButton_agentLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
-
-            }
-        });
+        backButton_agentLogIn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), WelcomeActivity.class)));
 
         phoneEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -96,7 +81,6 @@ public class AgentLogInActivity extends AppCompatActivity {
         if (phoneEt.getText().toString().isEmpty()) {
 
             Toast.makeText(getApplicationContext(), "Phone number required", Snackbar.LENGTH_LONG).show();
-//            Snackbar.make(findViewById(R.id.snackbar_text),"Phone number required",Snackbar.LENGTH_LONG).show();
 
         } else {
             goButton.setEnabled(false);
