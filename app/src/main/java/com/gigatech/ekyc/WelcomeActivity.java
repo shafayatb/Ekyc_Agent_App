@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.gigatech.ekyc.utils.SharedPreferenceClass;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     Button startButton;
@@ -25,8 +27,15 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if(SharedPreferenceClass.getIsFirstTime(getApplicationContext())){
+                    SharedPreferenceClass.saveIsFirstTime(getApplicationContext(), false);
+                    startActivity(new Intent(getApplicationContext(), TermsConditionsActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), AgentLogInActivity.class));
+                }
+
                 //For test purpose..this is Review Information Activity...
-                startActivity(new Intent(getApplicationContext(), AgentLogInActivity.class));
+
                //startActivity(new Intent(getApplicationContext(), ReviewInformationActivity.class));
             }
         });

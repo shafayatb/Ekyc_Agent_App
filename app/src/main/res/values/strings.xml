@@ -13,6 +13,7 @@
     <string name="nid_confirm">1.Make sure your captured NID card\'s photo is not blur/out-of-focus, you can go back and take photo once again.\n\n2.If everything is alright tap "Confirm"\n\n </string>
     <string name="confirm_msg2_pt2">Customer will get a tracking number which will be used for further steps of the account opening process. please refer to the sms for more details.</string>
     <string name="confirm_msg_pt1">Your given information have been successfully verified and an sms has been sent to customers: 0171853535 </string>
+    <string name="confirm_msg_pt3">Account opening application has been submitted. Waiting for verification.</string>
     <string name="menu_home">Dashboard</string>
     <string name="menu_gallery">New Customer Registration</string>
     <string name="menu_slideshow">FAQ</string>

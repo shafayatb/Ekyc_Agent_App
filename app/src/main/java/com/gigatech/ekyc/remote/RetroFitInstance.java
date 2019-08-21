@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetroFitInstance {
 
     private static Retrofit retrofit;
-    private static String BASE_URL = "http://puthi-ocr.com:3000/";
+    private static String BASE_URL = "http://ekyc.gigatechltd.com:3000/";
 
     public static Retrofit retrofitInstance() {
 

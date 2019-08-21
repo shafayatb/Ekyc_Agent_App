@@ -67,9 +67,38 @@ public class AgentVerificationActivity extends AppCompatActivity {
             }
         });
 
+        resendCodeTv.setOnClickListener(view -> {
+            resendCodeTv.setEnabled(false);
+            resendCodeTv.setTextColor(Color.parseColor("#9B9B9B"));
+            disposable.add(retrofitApiCall.getOtp(SharedPreferenceClass.getVal(getApplicationContext(), "agentNumber"), "agent")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<OtpResponse>(){
+
+                        @Override
+                        public void onSuccess(OtpResponse otpResponse) {
+                            resendCodeTv.setEnabled(true);
+                            resendCodeTv.setTextColor(Color.parseColor("#8A56AC"));
+                            if(otpResponse.getStatus().equals("success")){
+                                startActivity(new Intent(getApplicationContext(), AgentVerificationActivity.class));
+                            } else if(otpResponse.getStatus().equals("failed")){
+                                Toast.makeText(AgentVerificationActivity.this, "Mobile number is not valid", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            resendCodeTv.setEnabled(true);
+                            resendCodeTv.setTextColor(Color.parseColor("#8A56AC"));
+                            Toast.makeText(AgentVerificationActivity.this, "Mobile number is not valid", Toast.LENGTH_LONG).show();
+                        }
+                    }));
+        });
+
+
         nextButton.setOnClickListener(v -> {
 
-            disposable.add(retrofitApiCall.getOtp(otpVerifyEditText.getText().toString(), "agent")
+            disposable.add(retrofitApiCall.verifyOTP(SharedPreferenceClass.getVal(getApplicationContext(), "agentNumber"), otpVerifyEditText.getText().toString())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(new DisposableSingleObserver<OtpResponse>(){

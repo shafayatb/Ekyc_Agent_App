@@ -20,4 +20,19 @@ public class SharedPreferenceClass {
         return sharedPreferences.getString(key,null);
     }
 
+    public static void saveIsFirstTime(Context context,boolean value){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("saveValue",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("IsFirstTime",value);
+        editor.apply();
+
+    }
+
+    public static Boolean getIsFirstTime(Context context){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("saveValue",Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("IsFirstTime",true);
+    }
+
 }
