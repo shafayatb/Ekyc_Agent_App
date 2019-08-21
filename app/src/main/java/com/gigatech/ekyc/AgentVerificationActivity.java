@@ -97,7 +97,8 @@ public class AgentVerificationActivity extends AppCompatActivity {
 
 
         nextButton.setOnClickListener(v -> {
-
+            nextButton.setEnabled(false);
+            nextButton.setTextColor(Color.parseColor("#9B9B9B"));
             disposable.add(retrofitApiCall.verifyOTP(SharedPreferenceClass.getVal(getApplicationContext(), "agentNumber"), otpVerifyEditText.getText().toString())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

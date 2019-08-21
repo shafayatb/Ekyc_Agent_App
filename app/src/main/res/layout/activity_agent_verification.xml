@@ -124,7 +124,7 @@
             android:layout_marginTop="10dp"
             android:background="?android:attr/selectableItemBackground"
             android:text="next"
-            android:textColor="#f9f9f9" />
+            android:textColor="#9B9B9B" />
 
         <ImageView
             android:id="@+id/imageViewId_bd_curve"

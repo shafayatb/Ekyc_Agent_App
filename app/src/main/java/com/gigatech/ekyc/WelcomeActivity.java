@@ -23,21 +23,18 @@ public class WelcomeActivity extends AppCompatActivity {
         startButton = findViewById(R.id.startButtonId);
         relativeLayoutId_getStarted = findViewById(R.id.relativeLayoutId_getStarted);
 
-        relativeLayoutId_getStarted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        relativeLayoutId_getStarted.setOnClickListener(v -> {
 
-                if(SharedPreferenceClass.getIsFirstTime(getApplicationContext())){
-                    SharedPreferenceClass.saveIsFirstTime(getApplicationContext(), false);
-                    startActivity(new Intent(getApplicationContext(), TermsConditionsActivity.class));
-                } else {
-                    startActivity(new Intent(getApplicationContext(), AgentLogInActivity.class));
-                }
-
-                //For test purpose..this is Review Information Activity...
-
-               //startActivity(new Intent(getApplicationContext(), ReviewInformationActivity.class));
+            if(SharedPreferenceClass.getIsFirstTime(getApplicationContext())){
+                SharedPreferenceClass.saveIsFirstTime(getApplicationContext(), false);
+                startActivity(new Intent(getApplicationContext(), TermsConditionsActivity.class));
+            } else {
+                startActivity(new Intent(getApplicationContext(), AgentLogInActivity.class));
             }
+
+            //For test purpose..this is Review Information Activity...
+
+           //startActivity(new Intent(getApplicationContext(), ReviewInformationActivity.class));
         });
 
     }
