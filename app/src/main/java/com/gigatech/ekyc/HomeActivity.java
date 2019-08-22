@@ -60,22 +60,12 @@ public class HomeActivity extends AppCompatActivity
 
         Glide.with(getApplicationContext()).load(imgUrl).placeholder(R.drawable.person_black_24dp).circleCrop().into(imageViewId_proPic);
 
-        newUserTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        newUserTv.setOnClickListener(v -> {
 
-                layoutIdNewUser.setBackgroundResource(R.drawable.background_new_user);
+            layoutIdNewUser.setBackgroundResource(R.drawable.background_new_user);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+            new Handler().postDelayed(() -> startActivity(new Intent(getApplicationContext(),NidFrontSideCapture.class)),100);
 
-                        startActivity(new Intent(getApplicationContext(),TermsConditionsActivity.class));
-
-                    }
-                },100);
-
-            }
         });
 
     }
