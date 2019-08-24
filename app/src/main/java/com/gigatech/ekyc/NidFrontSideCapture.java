@@ -84,14 +84,7 @@ public class NidFrontSideCapture extends AppCompatActivity {
 
         textureView_imagePreview.setSurfaceTextureListener(surfaceTextureListener);
 
-        nidFrontConfmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                takePicture();
-
-            }
-        });
+        nidFrontConfmButton.setOnClickListener(v -> takePicture());
 
     }
 

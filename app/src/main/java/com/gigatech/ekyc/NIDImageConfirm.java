@@ -6,13 +6,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gigatech.ekyc.remote.RetroFitInstance;
 import com.gigatech.ekyc.remote.RetrofitApiCall;
@@ -20,24 +20,29 @@ import com.gigatech.ekyc.utils.SharedPreferenceClass;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class NIDImageConfirm extends AppCompatActivity {
 
     Button review_confirm_button;
-    ImageView imageViewId_nidFront,imageViewId_nidback;
+    ImageView imageViewId_nidFront, imageViewId_nidback;
     RetrofitApiCall retrofitApiCall;
     Bitmap frontImage, backImage;
+    CompositeDisposable disposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,48 +55,50 @@ public class NIDImageConfirm extends AppCompatActivity {
 
 
         frontImage = BitmapFactory.decodeFile(SharedPreferenceClass.
-                getVal(getApplicationContext(),"frontImage"));
+                getVal(getApplicationContext(), "frontImage"));
 
         imageViewId_nidFront.setImageBitmap(frontImage);
 
         backImage = BitmapFactory.decodeFile(SharedPreferenceClass.
-                getVal(getApplicationContext(),"backImage"));
+                getVal(getApplicationContext(), "backImage"));
 
         imageViewId_nidback.setImageBitmap(backImage);
 
 
+        review_confirm_button.setOnClickListener(v -> uploadImageToServer());
 
-        review_confirm_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(),ReviewInformationActivity.class));
-
-            }
-        });
-
-        uploadImageToServer();
+        //uploadImageToServer();
 
     }
 
-    void uploadImageToServer(){
+    void uploadImageToServer() {
 
         List<Uri> uris = new ArrayList<>();
 
-        Uri uri1= getImageUri(getApplicationContext(),frontImage);
-        Log.v("URI1",""+getImageUri(getApplicationContext(),frontImage));
+        File file1 = new File(SharedPreferenceClass.
+                getVal(getApplicationContext(), "frontImage"));
 
-        Uri uri2= getImageUri(getApplicationContext(),backImage);
-        Log.v("URI2",""+getImageUri(getApplicationContext(),backImage));
+        File file2 = new File(SharedPreferenceClass.
+                getVal(getApplicationContext(), "backImage"));
 
-        uris.add(0,uri1);
-        uris.add(0,uri2);
+        Uri uri1 = Uri.fromFile(file1);
+
+        Uri uri2 = Uri.fromFile(file2);
+
+//        Uri uri1 = getImageUri(getApplicationContext(), frontImage);
+//        Log.v("URI1", "" + getImageUri(getApplicationContext(), frontImage));
+//
+//        Uri uri2 = getImageUri(getApplicationContext(), backImage);
+//        Log.v("URI2", "" + getImageUri(getApplicationContext(), backImage));
+
+        uris.add(0, uri1);
+        uris.add(0, uri2);
 
         uploadImages(uris);
 
     }
 
-    void uploadImages(List<Uri> fileUris){
+    void uploadImages(List<Uri> fileUris) {
 
         retrofitApiCall = RetroFitInstance.retrofitInstance().create(RetrofitApiCall.class);
 
@@ -99,12 +106,38 @@ public class NIDImageConfirm extends AppCompatActivity {
 
 //        for (int i=0;i<=fileUris.size();i++){
 
-            images.add(prepareImage("frontImage",fileUris.get(0)));
-            images.add(prepareImage("backImage",fileUris.get(1)));
+        images.add(prepareImage("id_front", fileUris.get(0)));
+        images.add(prepareImage("id_back", fileUris.get(1)));
 
 //        }
 
-//        Call<ResponseBody> call = retrofitApiCall.imageNidUpload(images);
+        Map<String, String> map = new HashMap<>();
+
+        map.put("step", "1");
+        map.put("crop", "1");
+
+
+        disposable.add(retrofitApiCall.imageUpload("Token " + SharedPreferenceClass.getVal(getApplicationContext(), "agentToken"), map, images)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableSingleObserver<ResponseBody>() {
+
+                    @Override
+                    public void onSuccess(ResponseBody responseBody) {
+                        try {
+                            Log.v("Response", responseBody.string());
+                            startActivity(new Intent(getApplicationContext(), ReviewInformationActivity.class));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Log.e("ErrorResponse", e.getLocalizedMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.v("ErrorResponse", e.getLocalizedMessage());
+                    }
+                }));
+
 //
 //        call.enqueue(new Callback<ResponseBody>() {
 //            @Override
@@ -124,12 +157,14 @@ public class NIDImageConfirm extends AppCompatActivity {
 
     }
 
-    MultipartBody.Part prepareImage(String partName, Uri fileUri){
-        File file = new File(getRealPathFromURI(fileUri));
+    MultipartBody.Part prepareImage(String partName, Uri fileUri) {
+        File file = new File(Objects.requireNonNull(fileUri.getPath()));
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse(Objects.requireNonNull(getContentResolver().getType(fileUri))),file);
+        //RequestBody requestBody = RequestBody.create(MediaType.parse(Objects.requireNonNull(getContentResolver().getType(fileUri))), file);
 
-        return MultipartBody.Part.createFormData(partName,file.getName(),requestBody);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), file);
+
+        return MultipartBody.Part.createFormData(partName, file.getName(), requestBody);
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
@@ -151,5 +186,11 @@ public class NIDImageConfirm extends AppCompatActivity {
             }
         }
         return path;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
     }
 }

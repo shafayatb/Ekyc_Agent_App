@@ -80,7 +80,7 @@ public class AgentVerificationActivity extends AppCompatActivity {
                             resendCodeTv.setEnabled(true);
                             resendCodeTv.setTextColor(Color.parseColor("#8A56AC"));
                             if(otpResponse.getStatus().equals("success")){
-                                startActivity(new Intent(getApplicationContext(), AgentVerificationActivity.class));
+                                //startActivity(new Intent(getApplicationContext(), AgentVerificationActivity.class));
                             } else if(otpResponse.getStatus().equals("failed")){
                                 Toast.makeText(AgentVerificationActivity.this, "Mobile number is not valid", Toast.LENGTH_LONG).show();
                             }
