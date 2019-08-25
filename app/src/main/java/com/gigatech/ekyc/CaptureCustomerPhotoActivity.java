@@ -32,6 +32,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
@@ -51,6 +52,7 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
 
     TextureView textureViewId_customerImagePreview;
     Button customer_pic_capture;
+    ImageButton step_five_back;
 
     String cameraId;
     CameraDevice cameraDevice;
@@ -78,15 +80,13 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
 
         textureViewId_customerImagePreview = findViewById(R.id.textureViewId_customerImagePreview);
         customer_pic_capture = findViewById(R.id.customer_pic_capt_buttonId);
+        step_five_back = findViewById(R.id.step_five_back);
 
         textureViewId_customerImagePreview.setSurfaceTextureListener(surfaceTextureListener);
 
-        customer_pic_capture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),InfoConfSubmissionActivity.class));
-            }
-        });
+        customer_pic_capture.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),InfoConfSubmissionActivity.class)));
+
+        step_five_back.setOnClickListener(view -> finish());
 
     }
 

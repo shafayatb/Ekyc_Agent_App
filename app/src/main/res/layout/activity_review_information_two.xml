@@ -22,7 +22,7 @@
                     android:background="@drawable/bg_header">
 
                     <Button
-                        android:id="@+id/backFromAgentVerification_ButtonId"
+                        android:id="@+id/backStepThree_ButtonId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -35,7 +35,7 @@
                         android:id="@+id/step3id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/backFromAgentVerification_ButtonId"
+                        android:layout_below="@id/backStepThree_ButtonId"
                         android:layout_marginStart="150dp"
                         android:text="STEP 3"
                         android:layout_marginTop="20dp"
@@ -45,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/normaltextid"
-                        android:layout_below="@+id/backFromAgentVerification_ButtonId"
+                        android:layout_below="@id/backStepThree_ButtonId"
                         android:text="Review the information and edit if required"
                         android:textSize="16sp"
                         android:padding="10dp"

@@ -10,7 +10,19 @@
 
     >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STEP 5"
+            android:textColor="#090909"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            />
+
         <ImageButton
+            android:id="@+id/step_five_back"
             android:layout_width="35dp"
             android:layout_height="30dp"
             android:src="@drawable/arrow_left"
@@ -29,14 +41,7 @@
             android:layout_marginEnd="30dp"
             >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Face has been detected!"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp"
-                    android:textSize="14sp"
-                    />
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="200dp"
@@ -61,52 +66,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/instruction_IntroTvId"
-                    android:text="@string/instructions"
+                    android:text="Take a picture of the Applicant face"
                     android:textColor="#352641"
+                    android:gravity="center"
                     android:layout_below="@+id/cardViewId_customerPic"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
-                    android:textSize="25sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/instruction_1TvId"
-                    android:text="@string/camera_instruction_1"
-                    android:layout_below="@+id/instruction_IntroTvId"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="#767676"
-                    android:textSize="13sp"
-                    />
 
-                <TextView
-                    android:id="@+id/instruction_2TvId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/instruction_1TvId"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="-2dp"
-                    android:text="@string/camera_instruction_2"
-                    android:textColor="#767676"
-                    android:textSize="13sp"
-                    android:paddingStart="10dp"
-                    tools:ignore="RtlSymmetry" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/instruction_3TvId"
-                    android:text="@string/camera_instruction_3"
-                    android:layout_below="@+id/instruction_2TvId"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="#767676"
-                    android:textSize="13sp"
-                    android:layout_marginStart="10dp"
-                    android:paddingStart="20dp"
-                    tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -115,7 +85,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/customer_pic_capt_buttonId"
             android:layout_centerHorizontal="true"
-            android:text="test"
+            android:text="Take Photo"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"

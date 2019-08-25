@@ -1,5 +1,6 @@
 package com.gigatech.ekyc.remote;
 
+import com.gigatech.ekyc.model.NidResponse;
 import com.gigatech.ekyc.model.OtpResponse;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public interface RetrofitApiCall {
 
     @Multipart
     @POST(ApiEndpoints.CUSTOMER_REGISTRATION_URL)
-    Single<ResponseBody> imageUpload(
+    Single<NidResponse> imageUpload(
 //            @Part("description") RequestBody description,
             @Header("Authorization") String token,
             @QueryMap Map<String, String> stepsMap,

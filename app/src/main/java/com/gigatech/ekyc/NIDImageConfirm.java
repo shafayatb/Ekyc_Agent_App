@@ -5,22 +5,24 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gigatech.ekyc.model.NidResponse;
 import com.gigatech.ekyc.remote.RetroFitInstance;
 import com.gigatech.ekyc.remote.RetrofitApiCall;
 import com.gigatech.ekyc.utils.SharedPreferenceClass;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,11 +36,10 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 
 public class NIDImageConfirm extends AppCompatActivity {
 
-    Button review_confirm_button;
+    Button review_confirm_button, backNidReview_ButtonId;
     ImageView imageViewId_nidFront, imageViewId_nidback;
     RetrofitApiCall retrofitApiCall;
     Bitmap frontImage, backImage;
@@ -52,6 +53,7 @@ public class NIDImageConfirm extends AppCompatActivity {
         review_confirm_button = findViewById(R.id.review_cnfm_btnId);
         imageViewId_nidFront = findViewById(R.id.imageViewId_nidFront);
         imageViewId_nidback = findViewById(R.id.imageViewId_nidBack);
+        backNidReview_ButtonId = findViewById(R.id.backNidReview_ButtonId);
 
 
         frontImage = BitmapFactory.decodeFile(SharedPreferenceClass.
@@ -66,6 +68,8 @@ public class NIDImageConfirm extends AppCompatActivity {
 
 
         review_confirm_button.setOnClickListener(v -> uploadImageToServer());
+
+        backNidReview_ButtonId.setOnClickListener(v -> finish());
 
         //uploadImageToServer();
 
@@ -116,44 +120,35 @@ public class NIDImageConfirm extends AppCompatActivity {
         map.put("step", "1");
         map.put("crop", "1");
 
+        review_confirm_button.setEnabled(false);
+        review_confirm_button.setTextColor(Color.parseColor("#9B9B9B"));
 
         disposable.add(retrofitApiCall.imageUpload("Token " + SharedPreferenceClass.getVal(getApplicationContext(), "agentToken"), map, images)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableSingleObserver<ResponseBody>() {
+                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableSingleObserver<NidResponse>() {
 
                     @Override
-                    public void onSuccess(ResponseBody responseBody) {
-                        try {
-                            Log.v("Response", responseBody.string());
-                            startActivity(new Intent(getApplicationContext(), ReviewInformationActivity.class));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            Log.e("ErrorResponse", e.getLocalizedMessage());
+                    public void onSuccess(NidResponse nidResponse) {
+                        review_confirm_button.setEnabled(true);
+                        review_confirm_button.setTextColor(Color.parseColor("#f9f9f9"));
+                        if (nidResponse.getStatus().equals("success")) {
+                            Intent intent = new Intent(new Intent(getApplicationContext(), ReviewInformationActivity.class));
+                            intent.putExtra("NidResponse", nidResponse);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(NIDImageConfirm.this, "Failed to upload nid images", Toast.LENGTH_LONG).show();
                         }
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        review_confirm_button.setEnabled(true);
+                        review_confirm_button.setTextColor(Color.parseColor("#f9f9f9"));
                         Log.v("ErrorResponse", e.getLocalizedMessage());
                     }
                 }));
 
-//
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//
-//                Log.v("WRE",""+response.body());
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//
-//                Log.v("WRE",""+call.toString());
-//
-//            }
-//        });
 
     }
 

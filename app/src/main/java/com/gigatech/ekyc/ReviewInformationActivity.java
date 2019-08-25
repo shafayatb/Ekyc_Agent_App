@@ -20,7 +20,7 @@ public class ReviewInformationActivity extends AppCompatActivity implements Adap
 
     EditText date1;
     DatePickerDialog datePickerDialog;
-    Button nextButton;
+    Button nextButton, backStepThree_ButtonId;
     final Calendar myCalendar = Calendar.getInstance();
 
     @Override
@@ -30,6 +30,7 @@ public class ReviewInformationActivity extends AppCompatActivity implements Adap
 
         Spinner spinner = findViewById(R.id.spinnerid);
         nextButton = findViewById(R.id.nextButtonId);
+        backStepThree_ButtonId = findViewById(R.id.backStepThree_ButtonId);
         //dob=findViewById(R.id.dobid);
         date1=findViewById(R.id.dobid);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -39,34 +40,20 @@ public class ReviewInformationActivity extends AppCompatActivity implements Adap
         spinner.setOnItemSelectedListener(this);
 
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-
+        final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
         };
-        date1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(ReviewInformationActivity.this,android.R.style.Theme_Holo_Dialog_MinWidth, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        date1.setOnClickListener(v -> new DatePickerDialog(ReviewInformationActivity.this,android.R.style.Theme_Holo_Dialog_MinWidth, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show());
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ProvideAdditionalInformation.class));
-            }
-        });
+        nextButton.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),ProvideAdditionalInformation.class)));
+
+        backStepThree_ButtonId.setOnClickListener(view -> finish());
 
     }
     private void updateLabel() {
