@@ -18,7 +18,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
+                android:layout_height="520dp"
                 android:background="@drawable/black_bg">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,6 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
+                    android:visibility="gone"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="32dp"
                     android:spinnerMode="dropdown"
@@ -89,29 +90,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="61dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="24dp"
-                    android:textColorHint="#F3EFEF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/phone_edt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:hint="Customer's phone number"
-                        android:inputType="number"
-                        android:textColor="#ffffff"
-                        android:textColorHint="#ffffff" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout"
@@ -122,6 +101,7 @@
                     android:layout_marginEnd="24dp"
                     android:textColorHint="#F3EFEF"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/income_spinner">
@@ -145,12 +125,163 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
+                    android:visibility="gone"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/income_spinner" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phone_text_inp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:textColorHint="#F3EFEF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintLayout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phone_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="Mobile Phone Number"
+                        android:inputType="number"
+                        android:textColor="#ffffff"
+                        android:textColorHint="#ffffff" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/perma_add_text_inp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:textColorHint="#F3EFEF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phone_text_inp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/perma_add_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="Permanent Address"
+                        android:inputType="text"
+                        android:textColor="#ffffff"
+                        android:textColorHint="#ffffff" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/gender_layout"
+                    app:layout_constraintTop_toBottomOf="@id/perma_add_text_inp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="34dp"
+                    android:layout_marginEnd="34dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        android:textSize="14sp"
+                        android:textColor="#fff"/>
+                    <Spinner
+                        android:id="@+id/genderspinnerid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart">
+                    </Spinner>
+                    <View
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#000">
+                    </View>
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/profession_text_inp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:textColorHint="#F3EFEF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/gender_layout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/profession_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="Profession"
+                        android:inputType="text"
+                        android:textColor="#ffffff"
+                        android:textColorHint="#ffffff" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nominee_text_inp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:textColorHint="#F3EFEF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profession_text_inp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nominee_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="Nominee"
+                        android:inputType="textPersonName"
+                        android:textColor="#ffffff"
+                        android:textColorHint="#ffffff" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/relation_text_inp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:textColorHint="#F3EFEF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/nominee_text_inp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/relation_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="Relation"
+                        android:inputType="text"
+                        android:textColor="#ffffff"
+                        android:textColorHint="#ffffff" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/textView6"
@@ -159,6 +290,7 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="1dp"
+                    android:visibility="gone"
                     android:text="Source of Fund"
                     android:textColor="#ffffff"
                     app:layout_constraintBottom_toTopOf="@+id/income_spinner"
@@ -174,13 +306,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
                     android:layout_marginBottom="3dp"
+                    android:visibility="gone"
                     android:text="Profession"
                     android:textColor="#ffffff"
                     app:layout_constraintBottom_toTopOf="@+id/occupation_spinner2"
                     app:layout_constraintEnd_toStartOf="@+id/occupation_spinner2"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/income_spinner" />
+                    app:layout_constraintTop_toBottomOf="@id/phone_text_inp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -208,12 +341,12 @@
                 android:layout_marginBottom="10dp"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/round_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
-                android:text="Proced to take photo" />
+                android:text="Proceed to take photo" />
 
         </LinearLayout>
     </ScrollView>

@@ -123,7 +123,8 @@ public class NIDImageConfirm extends AppCompatActivity {
         review_confirm_button.setEnabled(false);
         review_confirm_button.setTextColor(Color.parseColor("#9B9B9B"));
 
-        disposable.add(retrofitApiCall.imageUpload("Token " + SharedPreferenceClass.getVal(getApplicationContext(), "agentToken"), map, images)
+        disposable.add(retrofitApiCall.imageUpload("Token " + SharedPreferenceClass.getVal(getApplicationContext(), "agentToken"), map,
+                new HashMap<>(), images)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableSingleObserver<NidResponse>() {
 

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -17,23 +18,31 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.TextureView;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.gigatech.ekyc.model.NidData;
+import com.gigatech.ekyc.model.NidResponse;
+import com.gigatech.ekyc.remote.RetroFitInstance;
+import com.gigatech.ekyc.remote.RetrofitApiCall;
+import com.gigatech.ekyc.utils.SharedPreferenceClass;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,14 +54,28 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class CaptureCustomerPhotoActivity extends AppCompatActivity {
 
     TextureView textureViewId_customerImagePreview;
     Button customer_pic_capture;
     ImageButton step_five_back;
+
+    NidData nidData = new NidData();
+    CompositeDisposable disposable = new CompositeDisposable();
 
     String cameraId;
     CameraDevice cameraDevice;
@@ -63,12 +86,14 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
         ORIENTATIONS.append(Surface.ROTATION_90, 0);
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
+
     private ImageReader imageReader;
     private File file;
     private static final int REQUEST_CAMERA_PERMISSION = 200;
@@ -84,9 +109,16 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
 
         textureViewId_customerImagePreview.setSurfaceTextureListener(surfaceTextureListener);
 
-        customer_pic_capture.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),InfoConfSubmissionActivity.class)));
+        customer_pic_capture.setOnClickListener(v -> {
+            takePicture();
+            //startActivity(new Intent(getApplicationContext(),InfoConfSubmissionActivity.class));
+        });
 
         step_five_back.setOnClickListener(view -> finish());
+
+        if (getIntent().getParcelableExtra("NidData") != null) {
+            nidData = getIntent().getParcelableExtra("NidData");
+        }
 
     }
 
@@ -120,7 +152,7 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void cameraOpen() throws CameraAccessException {
 
-        CameraManager cameraManager = (CameraManager)getSystemService(Context.CAMERA_SERVICE);
+        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         cameraId = cameraManager.getCameraIdList()[1];
         CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
         StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
@@ -165,14 +197,14 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
         @Override
         public void onError(@NonNull CameraDevice camera, int error) {
             cameraDevice.close();
-            cameraDevice=null;
+            cameraDevice = null;
         }
     };
 
     private void startCameraPreview() throws CameraAccessException {
 
         SurfaceTexture surfaceTexture = textureViewId_customerImagePreview.getSurfaceTexture();
-        surfaceTexture.setDefaultBufferSize(imageDimensions.getWidth(),imageDimensions.getHeight());
+        surfaceTexture.setDefaultBufferSize(imageDimensions.getWidth(), imageDimensions.getHeight());
 
         Surface surface = new Surface(surfaceTexture);
         captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
@@ -182,7 +214,7 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
             @Override
             public void onConfigured(@NonNull CameraCaptureSession session) {
 
-                if (cameraDevice == null){
+                if (cameraDevice == null) {
                     return;
                 }
                 cameraSession = session;
@@ -199,20 +231,20 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
             public void onConfigureFailed(@NonNull CameraCaptureSession session) {
 
             }
-        },null);
+        }, null);
 
     }
 
     private void updatePreview() throws CameraAccessException {
-        if (cameraDevice == null){
+        if (cameraDevice == null) {
             return;
         }
         captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
-        cameraSession.setRepeatingRequest(captureRequestBuilder.build(),null,mBackgroundHandler);
+        cameraSession.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
     }
 
     protected void takePicture() {
-        if(null == cameraDevice) {
+        if (null == cameraDevice) {
             return;
         }
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
@@ -239,7 +271,9 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-            final File file = new File(Environment.getExternalStorageDirectory()+"/pic"+timeStamp+".jpg");
+            String photoUri = Environment.getExternalStorageDirectory() + "/pic" + timeStamp + ".jpg";
+            file = new File(photoUri);
+            SharedPreferenceClass.saveVal(getApplicationContext(), "userImg", photoUri);
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
@@ -260,6 +294,7 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
                         }
                     }
                 }
+
                 private void save(byte[] bytes) throws IOException {
                     OutputStream output = null;
                     try {
@@ -277,7 +312,11 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-                    Toast.makeText(CaptureCustomerPhotoActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(CaptureCustomerPhotoActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), InfoConfSubmissionActivity.class);
+                    intent.putExtra("NidData", nidData);
+                    startActivity(intent);
+                    //submitApplicantInfo();
                     try {
                         startCameraPreview();
                     } catch (CameraAccessException e) {
@@ -294,10 +333,12 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
                 @Override
                 public void onConfigureFailed(CameraCaptureSession session) {
                 }
             }, mBackgroundHandler);
+
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -308,6 +349,7 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
         mBackgroundThread.start();
         mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
     }
+
     protected void stopBackgroundThread() {
         mBackgroundThread.quitSafely();
         try {
@@ -328,5 +370,15 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
             imageReader.close();
             imageReader = null;
         }
+    }
+
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closeCamera();
+
     }
 }

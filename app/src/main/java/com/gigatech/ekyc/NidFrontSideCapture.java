@@ -1,6 +1,7 @@
 package com.gigatech.ekyc;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,21 +19,22 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.TextureView;
-import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.gigatech.ekyc.utils.SharedPreferenceClass;
 
@@ -53,6 +55,7 @@ public class NidFrontSideCapture extends AppCompatActivity {
 
     Button nidFrontConfmButton;
     TextureView textureView_imagePreview;
+    TextView step1_textViewId, image_capture_msg;
     static String image = "frontImage";
 
     String cameraId;
@@ -64,15 +67,20 @@ public class NidFrontSideCapture extends AppCompatActivity {
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+    CameraManager cameraManager;
+
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
         ORIENTATIONS.append(Surface.ROTATION_90, 0);
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
+
     private ImageReader imageReader;
     private File file;
     private static final int REQUEST_CAMERA_PERMISSION = 200;
+//    private static final int REQUEST_READ_STORAGE_PERMISSION = 300;
+//    private static final int REQUEST_WRITE_STORAGE_PERMISSION = 400;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,8 @@ public class NidFrontSideCapture extends AppCompatActivity {
 
         nidFrontConfmButton = findViewById(R.id.nidFrontConfmButtonId);
         textureView_imagePreview = findViewById(R.id.textureViewId_imagePreview);
+        step1_textViewId = findViewById(R.id.step1_textViewId);
+        image_capture_msg = findViewById(R.id.image_capture_msg);
 
         textureView_imagePreview.setSurfaceTextureListener(surfaceTextureListener);
 
@@ -88,6 +98,7 @@ public class NidFrontSideCapture extends AppCompatActivity {
 
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -96,6 +107,12 @@ public class NidFrontSideCapture extends AppCompatActivity {
                 // close the app
                 Toast.makeText(getApplicationContext(), "Sorry!!!, you can't use this app without granting permission", Toast.LENGTH_LONG).show();
                 finish();
+            } else {
+                try {
+                    cameraManager.openCamera(cameraId, stateCallback, null);
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -140,24 +157,22 @@ public class NidFrontSideCapture extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void cameraOpen() throws CameraAccessException {
 
-        CameraManager cameraManager = (CameraManager)getSystemService(Context.CAMERA_SERVICE);
+        cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         cameraId = cameraManager.getCameraIdList()[0];
         CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
         StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
         assert map != null;
         imageDimensions = map.getOutputSizes(SurfaceTexture.class)[0];
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}
+                        , REQUEST_CAMERA_PERMISSION);
+            } else {
+                cameraManager.openCamera(cameraId, stateCallback, null);
+            }
+        } else {
+            cameraManager.openCamera(cameraId, stateCallback, null);
         }
-        cameraManager.openCamera(cameraId, stateCallback, null);
 
     }
 
@@ -185,14 +200,14 @@ public class NidFrontSideCapture extends AppCompatActivity {
         @Override
         public void onError(@NonNull CameraDevice camera, int error) {
             cameraDevice.close();
-            cameraDevice=null;
+            cameraDevice = null;
         }
     };
 
     private void startCameraPreview() throws CameraAccessException {
 
         SurfaceTexture surfaceTexture = textureView_imagePreview.getSurfaceTexture();
-        surfaceTexture.setDefaultBufferSize(imageDimensions.getWidth(),imageDimensions.getHeight());
+        surfaceTexture.setDefaultBufferSize(imageDimensions.getWidth(), imageDimensions.getHeight());
 
         Surface surface = new Surface(surfaceTexture);
         captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
@@ -202,7 +217,7 @@ public class NidFrontSideCapture extends AppCompatActivity {
             @Override
             public void onConfigured(@NonNull CameraCaptureSession session) {
 
-                if (cameraDevice == null){
+                if (cameraDevice == null) {
                     return;
                 }
                 cameraSession = session;
@@ -219,20 +234,20 @@ public class NidFrontSideCapture extends AppCompatActivity {
             public void onConfigureFailed(@NonNull CameraCaptureSession session) {
 
             }
-        },null);
+        }, null);
 
     }
 
     private void updatePreview() throws CameraAccessException {
-        if (cameraDevice == null){
+        if (cameraDevice == null) {
             return;
         }
         captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
-        cameraSession.setRepeatingRequest(captureRequestBuilder.build(),null,mBackgroundHandler);
+        cameraSession.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
     }
 
     protected void takePicture() {
-        if(null == cameraDevice) {
+        if (null == cameraDevice) {
             return;
         }
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
@@ -260,10 +275,10 @@ public class NidFrontSideCapture extends AppCompatActivity {
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
 
-            String photoUri =  Environment.getExternalStorageDirectory()+"/pic"+timeStamp+".jpg";
+            String photoUri = Environment.getExternalStorageDirectory() + "/pic" + timeStamp + ".jpg";
             final File file = new File(photoUri);
 
-            SharedPreferenceClass.saveVal(getApplicationContext(),image,photoUri);
+            SharedPreferenceClass.saveVal(getApplicationContext(), image, photoUri);
 
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
@@ -285,6 +300,7 @@ public class NidFrontSideCapture extends AppCompatActivity {
                         }
                     }
                 }
+
                 private void save(byte[] bytes) throws IOException {
                     OutputStream output = null;
                     try {
@@ -303,12 +319,15 @@ public class NidFrontSideCapture extends AppCompatActivity {
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
 
-                    Toast.makeText(NidFrontSideCapture.this, image +" clicked successfully ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NidFrontSideCapture.this, image + " clicked successfully ", Toast.LENGTH_SHORT).show();
 
                     if (image.equals("backImage"))
-                    startActivity(new Intent(getApplicationContext(),NIDImageConfirm.class));
+                        startActivity(new Intent(getApplicationContext(), NIDImageConfirm.class));
                     image = "backImage";
-
+                    runOnUiThread(() -> {
+                        step1_textViewId.setText("STEP 2");
+                        image_capture_msg.setText("Take a photo of the back side of your NID car/Smart card");
+                    });
                     try {
                         startCameraPreview();
                     } catch (CameraAccessException e) {
@@ -325,6 +344,7 @@ public class NidFrontSideCapture extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
                 @Override
                 public void onConfigureFailed(CameraCaptureSession session) {
                 }
@@ -339,6 +359,7 @@ public class NidFrontSideCapture extends AppCompatActivity {
         mBackgroundThread.start();
         mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
     }
+
     protected void stopBackgroundThread() {
         mBackgroundThread.quitSafely();
         try {

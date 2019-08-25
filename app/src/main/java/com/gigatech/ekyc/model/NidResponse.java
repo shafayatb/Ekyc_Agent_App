@@ -11,6 +11,10 @@ public class NidResponse implements Parcelable {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("detail")
+    @Expose
+    private String detail;
+
     @SerializedName("data")
     @Expose
     private NidData data;
@@ -31,6 +35,18 @@ public class NidResponse implements Parcelable {
         this.data = data;
     }
 
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public NidResponse() {
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -39,18 +55,17 @@ public class NidResponse implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.status);
+        dest.writeString(this.detail);
         dest.writeParcelable(this.data, flags);
-    }
-
-    public NidResponse() {
     }
 
     protected NidResponse(Parcel in) {
         this.status = in.readString();
+        this.detail = in.readString();
         this.data = in.readParcelable(NidData.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<NidResponse> CREATOR = new Parcelable.Creator<NidResponse>() {
+    public static final Creator<NidResponse> CREATOR = new Creator<NidResponse>() {
         @Override
         public NidResponse createFromParcel(Parcel source) {
             return new NidResponse(source);

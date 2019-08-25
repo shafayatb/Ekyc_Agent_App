@@ -35,6 +35,72 @@ public class NidData implements Parcelable {
     @SerializedName("id_back_url")
     @Expose
     private String idBackUrl;
+    @SerializedName("perm_address")
+    @Expose
+    private String permAddress;
+    @SerializedName("mobile_number")
+    @Expose
+    private String mobileNumber;
+    @SerializedName("gender")
+    @Expose
+    private String gender;
+    @SerializedName("profession")
+    @Expose
+    private String profession;
+    @SerializedName("nominee")
+    @Expose
+    private String nominee;
+    @SerializedName("nominee_relation")
+    @Expose
+    private String nomineeRelation;
+
+    public String getPermAddress() {
+        return permAddress;
+    }
+
+    public void setPermAddress(String permAddress) {
+        this.permAddress = permAddress;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getNominee() {
+        return nominee;
+    }
+
+    public void setNominee(String nominee) {
+        this.nominee = nominee;
+    }
+
+    public String getNomineeRelation() {
+        return nomineeRelation;
+    }
+
+    public void setNomineeRelation(String nomineeRelation) {
+        this.nomineeRelation = nomineeRelation;
+    }
 
     public String getNidNo() {
         return nidNo;
@@ -108,6 +174,9 @@ public class NidData implements Parcelable {
         this.idBackUrl = idBackUrl;
     }
 
+    public NidData() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -124,9 +193,12 @@ public class NidData implements Parcelable {
         dest.writeString(this.address);
         dest.writeString(this.idFrontUrl);
         dest.writeString(this.idBackUrl);
-    }
-
-    public NidData() {
+        dest.writeString(this.permAddress);
+        dest.writeString(this.mobileNumber);
+        dest.writeString(this.gender);
+        dest.writeString(this.profession);
+        dest.writeString(this.nominee);
+        dest.writeString(this.nomineeRelation);
     }
 
     protected NidData(Parcel in) {
@@ -139,9 +211,15 @@ public class NidData implements Parcelable {
         this.address = in.readString();
         this.idFrontUrl = in.readString();
         this.idBackUrl = in.readString();
+        this.permAddress = in.readString();
+        this.mobileNumber = in.readString();
+        this.gender = in.readString();
+        this.profession = in.readString();
+        this.nominee = in.readString();
+        this.nomineeRelation = in.readString();
     }
 
-    public static final Parcelable.Creator<NidData> CREATOR = new Parcelable.Creator<NidData>() {
+    public static final Creator<NidData> CREATOR = new Creator<NidData>() {
         @Override
         public NidData createFromParcel(Parcel source) {
             return new NidData(source);
