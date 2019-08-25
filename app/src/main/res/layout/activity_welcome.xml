@@ -1,46 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeActivity"
-    >
+    tools:context=".WelcomeActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/bgBlackId"
-        android:background="@drawable/bg_black"
-        android:layout_marginBottom="250dp"
-        />
-
-    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/backgroundImageId"
-        android:background="@drawable/bg_1"
         android:layout_marginBottom="250dp"
-        />
+        android:background="@drawable/bg_black" />
+
+    <ImageView
+        android:id="@+id/backgroundImageId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="250dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/app_welcome_background" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="190dp"
-        android:background="@drawable/bg_2"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
         android:layout_marginBottom="135dp"
-        android:layout_marginStart="50dp">
+        android:background="@drawable/bg_2">
 
         <TextView
+            android:id="@+id/tvId_hiThere"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvId_hiThere"
-            android:text="Hi there"
-            android:textColor="#f9f9f9"
             android:layout_marginStart="50dp"
             android:layout_marginTop="50dp"
-            android:textSize="11sp"
-            />
+            android:text="Hi there"
+            android:textColor="#f9f9f9"
+            android:textSize="11sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,38 +52,35 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayoutId_getStarted"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:id="@+id/relativeLayoutId_getStarted"
-        android:background="@drawable/bg_3"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="110dp"
-        android:layout_alignParentEnd="true"
-        >
+        android:background="@drawable/bg_3">
 
         <Button
+            android:id="@+id/startedTvId"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:id="@+id/startedTvId"
-            android:text="GET STARTED"
             android:layout_centerInParent="true"
-            android:textColor="#f9f9f9"
             android:background="?android:attr/selectableItemBackground"
-            android:textSize="14sp"
             android:clickable="false"
-            />
+            android:text="GET STARTED"
+            android:textColor="#f9f9f9"
+            android:textSize="14sp" />
 
         <Button
+            android:id="@+id/startButtonId"
             android:layout_width="20dp"
             android:layout_height="10dp"
-            android:id="@+id/startButtonId"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/startedTvId"
             android:background="?android:attr/selectableItemBackground"
-            android:layout_centerInParent="true"
-            android:drawableEnd="@drawable/arrow_forward_black_24dp"
-            android:layout_marginStart="10dp"
             android:clickable="false"
-            />
+            android:drawableEnd="@drawable/arrow_forward_black_24dp" />
 
     </RelativeLayout>
 </RelativeLayout>
