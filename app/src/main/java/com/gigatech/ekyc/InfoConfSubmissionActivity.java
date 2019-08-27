@@ -209,14 +209,14 @@ public class InfoConfSubmissionActivity extends AppCompatActivity {
                 nidData.getIdFrontUrl()
         );
 
-        body.put("id_front_url", id_front_url);
+        body.put("id_front_name", id_front_url);
 
         RequestBody id_back_url = RequestBody.create(
                 MediaType.parse("text/plain"),
                 nidData.getIdBackUrl()
         );
 
-        body.put("id_back_url", id_back_url);
+        body.put("id_back_name", id_back_url);
 
 
         return body;

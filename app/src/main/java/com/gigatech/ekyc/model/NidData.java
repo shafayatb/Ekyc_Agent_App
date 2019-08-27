@@ -29,12 +29,13 @@ public class NidData implements Parcelable {
     @SerializedName("address")
     @Expose
     private String address;
-    @SerializedName("id_front_url")
+    @SerializedName("id_front_name")
     @Expose
     private String idFrontUrl;
-    @SerializedName("id_back_url")
+    @SerializedName("id_back_name")
     @Expose
     private String idBackUrl;
+
     @SerializedName("perm_address")
     @Expose
     private String permAddress;
@@ -53,6 +54,28 @@ public class NidData implements Parcelable {
     @SerializedName("nominee_relation")
     @Expose
     private String nomineeRelation;
+    @SerializedName("id_front_image")
+    @Expose
+    private String idFrontImage;
+    @SerializedName("id_back_image")
+    @Expose
+    private String idBackImage;
+
+    public String getIdFrontImage() {
+        return idFrontImage;
+    }
+
+    public void setIdFrontImage(String idFrontImage) {
+        this.idFrontImage = idFrontImage;
+    }
+
+    public String getIdBackImage() {
+        return idBackImage;
+    }
+
+    public void setIdBackImage(String idBackImage) {
+        this.idBackImage = idBackImage;
+    }
 
     public String getPermAddress() {
         return permAddress;
@@ -199,6 +222,8 @@ public class NidData implements Parcelable {
         dest.writeString(this.profession);
         dest.writeString(this.nominee);
         dest.writeString(this.nomineeRelation);
+        dest.writeString(this.idFrontImage);
+        dest.writeString(this.idBackImage);
     }
 
     protected NidData(Parcel in) {
@@ -217,6 +242,8 @@ public class NidData implements Parcelable {
         this.profession = in.readString();
         this.nominee = in.readString();
         this.nomineeRelation = in.readString();
+        this.idFrontImage = in.readString();
+        this.idBackImage = in.readString();
     }
 
     public static final Creator<NidData> CREATOR = new Creator<NidData>() {
