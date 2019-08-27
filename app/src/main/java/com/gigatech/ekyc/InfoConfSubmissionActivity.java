@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -33,7 +32,7 @@ import okhttp3.RequestBody;
 
 public class InfoConfSubmissionActivity extends AppCompatActivity {
 
-    Button submit_backButton;
+    Button submit_backButton, cancel_backButtonId;
     NidData nidData = new NidData();
     CompositeDisposable disposable = new CompositeDisposable();
 
@@ -43,10 +42,13 @@ public class InfoConfSubmissionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info_conf_submission);
 
         submit_backButton = findViewById(R.id.submit_backButtonId);
+        cancel_backButtonId = findViewById(R.id.cancel_backButtonId);
 
         if (getIntent().getParcelableExtra("NidData") != null) {
             nidData = getIntent().getParcelableExtra("NidData");
         }
+
+        cancel_backButtonId.setOnClickListener(v -> finish());
 
         submit_backButton.setOnClickListener(v -> submitApplicantInfo());
 

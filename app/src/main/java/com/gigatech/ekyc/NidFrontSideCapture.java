@@ -318,8 +318,8 @@ public class NidFrontSideCapture extends AppCompatActivity {
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-
-                    Toast.makeText(NidFrontSideCapture.this, image + " clicked successfully ", Toast.LENGTH_SHORT).show();
+                    String cap = image.substring(0, 1).toUpperCase() + image.substring(1);
+                    Toast.makeText(NidFrontSideCapture.this, "Successfully taken NID "+image + " Image", Toast.LENGTH_SHORT).show();
 
                     if (image.equals("backImage"))
                         startActivity(new Intent(getApplicationContext(), NIDImageConfirm.class));

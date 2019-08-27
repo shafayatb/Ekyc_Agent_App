@@ -153,7 +153,7 @@ public class CaptureCustomerPhotoActivity extends AppCompatActivity {
     private void cameraOpen() throws CameraAccessException {
 
         CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        cameraId = cameraManager.getCameraIdList()[1];
+        cameraId = cameraManager.getCameraIdList()[0];
         CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(cameraId);
         StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
         assert map != null;

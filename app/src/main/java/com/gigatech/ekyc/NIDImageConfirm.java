@@ -146,6 +146,7 @@ public class NIDImageConfirm extends AppCompatActivity {
                     public void onError(Throwable e) {
                         review_confirm_button.setEnabled(true);
                         review_confirm_button.setTextColor(Color.parseColor("#f9f9f9"));
+                        Toast.makeText(NIDImageConfirm.this, "Failed to send Nid card's images.", Toast.LENGTH_LONG).show();
                         Log.v("ErrorResponse", e.getLocalizedMessage());
                     }
                 }));

@@ -23,16 +23,14 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="110dp"
                 android:background="@drawable/bg_upper_curve">
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="68dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="30dp"
                     android:text="Review NID card's \nImage"
                     android:textColor="#FFFFFF"
                     android:textSize="26sp"
@@ -61,7 +59,7 @@
                 android:textColor="#f9f9f9"
                 android:textSize="20sp"
                 android:layout_marginStart="60dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 />
 
             <ImageView
@@ -72,7 +70,7 @@
                 android:layout_marginTop="10dp"
                 android:scaleType="centerCrop"
                 android:background="@drawable/asda"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="15dp"
                  />
 
             <TextView

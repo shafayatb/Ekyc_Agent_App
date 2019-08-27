@@ -16,7 +16,7 @@
         android:id="@+id/backgroundImageId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="250dp"
+        android:layout_marginBottom="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/app_welcome_background" />
 
@@ -25,7 +25,7 @@
         android:layout_height="190dp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="50dp"
-        android:layout_marginBottom="135dp"
+        android:layout_marginBottom="55dp"
         android:background="@drawable/bg_2">
 
         <TextView
@@ -57,7 +57,7 @@
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/bg_3">
 
         <Button
