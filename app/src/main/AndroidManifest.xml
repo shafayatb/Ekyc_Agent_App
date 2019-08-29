@@ -31,7 +31,10 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+
+
+        </activity>
         <activity android:name=".AgentVerificationActivity" />
         <activity android:name=".AgentLogInActivity" />
         <activity android:name=".WelcomeActivity" />

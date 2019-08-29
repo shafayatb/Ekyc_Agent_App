@@ -80,7 +80,7 @@ public class AgentLogInActivity extends AppCompatActivity {
 
         if (phoneEt.getText().toString().isEmpty()) {
 
-            Toast.makeText(getApplicationContext(), "Phone number required", Snackbar.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Phone number required", Toast.LENGTH_LONG).show();
 
         } else {
             goButton.setEnabled(false);

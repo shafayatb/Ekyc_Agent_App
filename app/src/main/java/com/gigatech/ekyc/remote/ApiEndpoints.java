@@ -14,5 +14,7 @@ public final class ApiEndpoints {
 
     static final String CUSTOMER_REGISTRATION_URL = "agent/customer-registration/";
 
+    static final String AGENT_ME = "agent/me/";
+
 
 }

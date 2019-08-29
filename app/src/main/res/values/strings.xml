@@ -3,7 +3,7 @@
     <string name="agentStartText">To Start off,\nPlease enter your\nPhone Number</string>
     <string name="goString">go!</string>
     <string name="verificationCodeString">A Verification Code\nhas been sent to you\nto verify your identity</string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">EKYC Home.</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Hi,</string>

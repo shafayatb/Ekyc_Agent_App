@@ -7,6 +7,8 @@ import android.view.View;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
+
+import com.gigatech.ekyc.utils.SharedPreferenceClass;
 import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -24,7 +26,7 @@ public class HomeActivity extends AppCompatActivity
 
     LinearLayout layoutIdNewUser;
     ImageView imageViewId_proPic;
-    TextView newUserTv;
+    TextView newUserTv, agentNameTvId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         layoutIdNewUser = findViewById(R.id.layoutIdNewUser);
+        agentNameTvId = findViewById(R.id.agentNameTvId);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -58,7 +61,7 @@ public class HomeActivity extends AppCompatActivity
         imageViewId_proPic = findViewById(R.id.imageViewId_ProPic);
         newUserTv = findViewById(R.id.newUserTvId);
 
-        Glide.with(getApplicationContext()).load(imgUrl).placeholder(R.drawable.person_black_24dp).circleCrop().into(imageViewId_proPic);
+        //Glide.with(getApplicationContext()).load(imgUrl).placeholder(R.drawable.person_black_24dp).circleCrop().into(imageViewId_proPic);
 
         newUserTv.setOnClickListener(v -> {
 
@@ -67,6 +70,8 @@ public class HomeActivity extends AppCompatActivity
             new Handler().postDelayed(() -> startActivity(new Intent(getApplicationContext(),NidFrontSideCapture.class)),100);
 
         });
+
+        agentNameTvId.setText(SharedPreferenceClass.getVal(getApplicationContext(),"agentNumber"));
 
     }
 
