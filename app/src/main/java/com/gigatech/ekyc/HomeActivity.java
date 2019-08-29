@@ -3,23 +3,29 @@ package com.gigatech.ekyc;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import android.view.MenuItem;
-
-import com.gigatech.ekyc.utils.SharedPreferenceClass;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.gigatech.ekyc.model.AgentModel;
+import com.gigatech.ekyc.remote.RetroFitInstance;
+import com.gigatech.ekyc.remote.RetrofitApiCall;
+import com.gigatech.ekyc.utils.SharedPreferenceClass;
+import com.google.android.material.navigation.NavigationView;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,6 +33,8 @@ public class HomeActivity extends AppCompatActivity
     LinearLayout layoutIdNewUser;
     ImageView imageViewId_proPic;
     TextView newUserTv, agentNameTvId;
+
+    CompositeDisposable disposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +75,28 @@ public class HomeActivity extends AppCompatActivity
 
             layoutIdNewUser.setBackgroundResource(R.drawable.background_new_user);
 
-            new Handler().postDelayed(() -> startActivity(new Intent(getApplicationContext(),NidFrontSideCapture.class)),100);
+            new Handler().postDelayed(() -> startActivity(new Intent(getApplicationContext(), NidFrontSideCapture.class)), 100);
 
         });
 
-        agentNameTvId.setText(SharedPreferenceClass.getVal(getApplicationContext(),"agentNumber"));
+        agentNameTvId.setText(SharedPreferenceClass.getVal(getApplicationContext(), "agentNumber"));
+
+        RetrofitApiCall retrofitApiCall = RetroFitInstance.retrofitInstance().create(RetrofitApiCall.class);
+
+        disposable.add(retrofitApiCall.getAgentMe("Token " + SharedPreferenceClass.getVal(getApplicationContext(), "agentNumber"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<AgentModel>() {
+                    @Override
+                    public void onSuccess(AgentModel agentModel) {
+                        agentNameTvId.setText(agentModel.getAgent().getMobileNo());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                }));
 
     }
 
@@ -124,5 +149,11 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
     }
 }

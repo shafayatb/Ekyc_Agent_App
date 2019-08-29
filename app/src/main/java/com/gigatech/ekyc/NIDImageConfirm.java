@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.gigatech.ekyc.model.NidResponse;
 import com.gigatech.ekyc.remote.RetroFitInstance;
 import com.gigatech.ekyc.remote.RetrofitApiCall;
 import com.gigatech.ekyc.utils.SharedPreferenceClass;
+import com.google.android.material.card.MaterialCardView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -44,6 +46,7 @@ public class NIDImageConfirm extends AppCompatActivity {
     RetrofitApiCall retrofitApiCall;
     Bitmap frontImage, backImage;
     CompositeDisposable disposable = new CompositeDisposable();
+    MaterialCardView progressCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class NIDImageConfirm extends AppCompatActivity {
         imageViewId_nidFront = findViewById(R.id.imageViewId_nidFront);
         imageViewId_nidback = findViewById(R.id.imageViewId_nidBack);
         backNidReview_ButtonId = findViewById(R.id.backNidReview_ButtonId);
+        progressCardView = findViewById(R.id.progressCardView);
 
 
         frontImage = BitmapFactory.decodeFile(SharedPreferenceClass.
@@ -120,6 +124,8 @@ public class NIDImageConfirm extends AppCompatActivity {
         map.put("step", "1");
         map.put("crop", "1");
 
+        progressCardView.setVisibility(View.VISIBLE);
+
         review_confirm_button.setEnabled(false);
         review_confirm_button.setTextColor(Color.parseColor("#9B9B9B"));
 
@@ -130,6 +136,7 @@ public class NIDImageConfirm extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(NidResponse nidResponse) {
+                        progressCardView.setVisibility(View.GONE);
                         review_confirm_button.setEnabled(true);
                         review_confirm_button.setTextColor(Color.parseColor("#f9f9f9"));
                         if (nidResponse.getStatus().equals("success")) {
@@ -144,6 +151,7 @@ public class NIDImageConfirm extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
+                        progressCardView.setVisibility(View.GONE);
                         review_confirm_button.setEnabled(true);
                         review_confirm_button.setTextColor(Color.parseColor("#f9f9f9"));
                         Toast.makeText(NIDImageConfirm.this, "Failed to send Nid card's images.", Toast.LENGTH_LONG).show();

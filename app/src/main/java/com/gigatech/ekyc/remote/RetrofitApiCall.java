@@ -1,5 +1,6 @@
 package com.gigatech.ekyc.remote;
 
+import com.gigatech.ekyc.model.AgentModel;
 import com.gigatech.ekyc.model.NidResponse;
 import com.gigatech.ekyc.model.OtpResponse;
 
@@ -43,6 +44,6 @@ public interface RetrofitApiCall {
             @Part List<MultipartBody.Part> images);
 
     @GET(ApiEndpoints.AGENT_ME)
-    Single<ResponseBody> getAgentMe(@Header("Authorization") String token);
+    Single<AgentModel> getAgentMe(@Header("Authorization") String token);
 
 }
