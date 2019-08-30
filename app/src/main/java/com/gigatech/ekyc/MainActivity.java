@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
+        startActivity(new Intent(getApplicationContext(), NidFrontSideCapture.class));
 //        startActivity(new Intent(getApplicationContext(), NidFrontSideCapture.class));
 
         /*context = MainActivity.this;

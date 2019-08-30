@@ -12,36 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/step1_textViewId"
-                android:layout_marginTop="40dp"
-                android:text="STEP 1"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:textSize="22sp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="18dp"
-                android:layout_marginEnd="20dp"
-                >
-
-                <TextureView
-                    android:layout_width="match_parent"
-                    android:layout_height="220dp"
-                    android:id="@+id/textureViewId_imagePreview"
-                    />
-
-            </com.google.android.material.card.MaterialCardView>
+            <Button
+                android:id="@+id/nidFrontConfmButtonId"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/camera"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_capture_msg" />
 
             <TextView
                 android:id="@+id/image_capture_msg"
@@ -53,45 +38,68 @@
                 android:text="@string/take_a_photo"
                 android:textAlignment="viewStart"
                 android:textColor="#fff"
+                android:textSize="26sp"
                 android:textStyle="bold"
-                android:textSize="26sp" />
+                app:layout_constraintTop_toBottomOf="@id/textureCardView" />
 
-            <!--<TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:paddingStart="50dp"
-                android:text="1.Make sure your room or \nsurrounding is well nlit so you can\n read your NID card info through\n the camera   "
-                android:textColor="#707070"
-                android:textSize="19sp"
-                android:paddingEnd="30dp"
-                />
 
             <TextView
+                android:id="@+id/step1_textViewId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:paddingLeft="50dp"
-                android:text="2.Take the NID card in the\n picture form as best as you can"
-                android:textColor="#707070"
-                android:textSize="19sp"
-                android:paddingEnd="30dp"/>-->
+                android:layout_marginTop="40dp"
+                android:text="STEP 1"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="22sp"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/nidFrontConfmButtonId"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/camera"
-                />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/textureCardView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintDimensionRatio="H,16:10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/step1_textViewId">
+
+                <TextureView
+                    android:id="@+id/textureViewId_imagePreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.card.MaterialCardView>
 
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 
 </LinearLayout>
+
+
+    <!--<TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:paddingStart="50dp"
+                    android:text="1.Make sure your room or \nsurrounding is well nlit so you can\n read your NID card info through\n the camera   "
+                    android:textColor="#707070"
+                    android:textSize="19sp"
+                    android:paddingEnd="30dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="50dp"
+                    android:text="2.Take the NID card in the\n picture form as best as you can"
+                    android:textColor="#707070"
+                    android:textSize="19sp"
+                    android:paddingEnd="30dp"/>-->

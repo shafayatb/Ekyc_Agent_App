@@ -20,11 +20,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gigatech.ekyc.model.NidResponse;
 import com.gigatech.ekyc.remote.RetroFitInstance;
 import com.gigatech.ekyc.remote.RetrofitApiCall;
+import com.gigatech.ekyc.utils.ImageUtils;
 import com.gigatech.ekyc.utils.SharedPreferenceClass;
 import com.google.android.material.card.MaterialCardView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +49,8 @@ public class NIDImageConfirm extends AppCompatActivity {
     Bitmap frontImage, backImage;
     CompositeDisposable disposable = new CompositeDisposable();
     MaterialCardView progressCardView;
+    File file1, file2;
+    Uri uri1, uri2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,16 +63,30 @@ public class NIDImageConfirm extends AppCompatActivity {
         backNidReview_ButtonId = findViewById(R.id.backNidReview_ButtonId);
         progressCardView = findViewById(R.id.progressCardView);
 
-
-        frontImage = BitmapFactory.decodeFile(SharedPreferenceClass.
+        file1 = new File(SharedPreferenceClass.
                 getVal(getApplicationContext(), "frontImage"));
 
-        imageViewId_nidFront.setImageBitmap(frontImage);
-
-        backImage = BitmapFactory.decodeFile(SharedPreferenceClass.
+        file2 = new File(SharedPreferenceClass.
                 getVal(getApplicationContext(), "backImage"));
 
-        imageViewId_nidback.setImageBitmap(backImage);
+        uri1 = Uri.fromFile(file1);
+
+        uri2 = Uri.fromFile(file2);
+
+
+        try {
+            frontImage = ImageUtils.handleSamplingAndRotationBitmap(getApplicationContext(), uri1);
+
+            imageViewId_nidFront.setImageBitmap(frontImage);
+
+            backImage = ImageUtils.handleSamplingAndRotationBitmap(getApplicationContext(), uri2);
+
+            imageViewId_nidback.setImageBitmap(backImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
 
 
         review_confirm_button.setOnClickListener(v -> uploadImageToServer());
@@ -82,16 +100,6 @@ public class NIDImageConfirm extends AppCompatActivity {
     void uploadImageToServer() {
 
         List<Uri> uris = new ArrayList<>();
-
-        File file1 = new File(SharedPreferenceClass.
-                getVal(getApplicationContext(), "frontImage"));
-
-        File file2 = new File(SharedPreferenceClass.
-                getVal(getApplicationContext(), "backImage"));
-
-        Uri uri1 = Uri.fromFile(file1);
-
-        Uri uri2 = Uri.fromFile(file2);
 
 //        Uri uri1 = getImageUri(getApplicationContext(), frontImage);
 //        Log.v("URI1", "" + getImageUri(getApplicationContext(), frontImage));
