@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity
     ImageView imageViewId_proPic;
     TextView newUserTv, agentNameTvId;
 
-    CompositeDisposable disposable;
+    CompositeDisposable disposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

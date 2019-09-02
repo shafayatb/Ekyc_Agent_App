@@ -152,7 +152,7 @@ public class NIDImageConfirm extends AppCompatActivity {
                             intent.putExtra("NidResponse", nidResponse);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(NIDImageConfirm.this, "Failed to upload nid images", Toast.LENGTH_LONG).show();
+                            Toast.makeText(NIDImageConfirm.this, nidResponse.getMessage(), Toast.LENGTH_LONG).show();
                         }
 
                     }

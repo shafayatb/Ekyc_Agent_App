@@ -19,6 +19,10 @@ public class NidResponse implements Parcelable {
     @Expose
     private NidData data;
 
+    @SerializedName("message")
+    @Expose
+    private String message;
+
     public String getStatus() {
         return status;
     }
@@ -43,6 +47,14 @@ public class NidResponse implements Parcelable {
         this.detail = detail;
     }
 
+    public String getMessage() {
+        return message != null ? message : "Failed to upload Nid Images";
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public NidResponse() {
     }
 
@@ -57,12 +69,14 @@ public class NidResponse implements Parcelable {
         dest.writeString(this.status);
         dest.writeString(this.detail);
         dest.writeParcelable(this.data, flags);
+        dest.writeString(this.message);
     }
 
     protected NidResponse(Parcel in) {
         this.status = in.readString();
         this.detail = in.readString();
         this.data = in.readParcelable(NidData.class.getClassLoader());
+        this.message = in.readString();
     }
 
     public static final Creator<NidResponse> CREATOR = new Creator<NidResponse>() {
